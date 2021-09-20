@@ -1,4 +1,3 @@
-#include <array>
 #include "pieces.h"
 #include "board.h"
 
