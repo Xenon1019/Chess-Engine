@@ -10,9 +10,8 @@ private:
     bool t_tileColor;
 public:
     explicit Tile(bool tileColor = true);
-    ~Tile();
     bool isEmpty();      
-    Piece &getPiece();
+    Piece & getPiece() const;
     void setColor(bool);
     void setPiece(Piece &);
     PieceType pieceType();
@@ -26,9 +25,10 @@ private:
     const int b_numTiles;
     std::vector <Tile> b_tiles;
 public:
-    Tile &getTileByLocation(int, int);
+    Tile & getTileByLocation(int, int);
     explicit Board(int size = 8);
-    explicit Board(std::string);
+    explicit Board(const std::string&);
     void printBoard();
+    Piece &defaultPiece(int) const;
 };
 #endif
