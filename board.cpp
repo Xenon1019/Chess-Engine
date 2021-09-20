@@ -20,7 +20,7 @@ void Tile::setPiece(Piece &piece){
     t_piece = piece;
     delete temp;
 }
-void Tile::printTile(void){
+void Tile::printTile(){
     char printChar;
     if(t_piece.isNone()){
         if(t_tileColor)           printChar = 'W';
@@ -56,9 +56,13 @@ Board::Board(int size)
     }
 }
 
-void Board::printBoard(void){
+void Board::printBoard(){
     for(int tileIndex{};tileIndex < b_numTiles;tileIndex++){
         if(tileIndex % b_size == 0)     std::cout << std::endl;
         b_tiles.at(tileIndex).printTile();
     }
 }
+
+Board::Board(std::string fenString)
+    :b_size{8}, b_numTiles{64}, b_tiles{}
+{}

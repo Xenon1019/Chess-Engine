@@ -16,15 +16,15 @@ private:
     PieceType p_type;
     bool p_color;  //true for white          false for black
 public:
-    Piece(bool color = true, PieceType type = PieceType::NONE);
-    bool isWhite();
-    bool isNone();
-    bool isPawn();
-    bool isBishop();
-    bool isRook();
-    bool isKing();
-    bool isQueen();
-    bool isKnight();
-    PieceType type();
+    explicit Piece(bool color = true, PieceType type = PieceType::NONE);
+    bool isWhite() const;
+    bool isNone()const;
+    bool isPawn()const;
+    bool isBishop()const;
+    bool isRook()const;
+    bool isKing()const;
+    bool isQueen()const;
+    bool isKnight()const;
+    PieceType type()const;
 };
 #endif

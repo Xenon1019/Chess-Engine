@@ -9,7 +9,7 @@ private:
     Piece &t_piece;
     bool t_tileColor;
 public:
-    Tile(bool tileColor = true);
+    explicit Tile(bool tileColor = true);
     ~Tile();
     bool isEmpty();      
     Piece &getPiece();
@@ -27,8 +27,8 @@ private:
     std::vector <Tile> b_tiles;
 public:
     Tile &getTileByLocation(int, int);
-    Board(int size = 8);
-    Board(std::string);
-    void printBoard(void);
+    explicit Board(int size = 8);
+    explicit Board(std::string);
+    void printBoard();
 };
 #endif
