@@ -1,6 +1,9 @@
 #ifndef PIECES_H
 #define PIECES_H
 
+#include <cctype>
+#include <cassert>
+
 enum class PieceType{
     PAWN,
     ROOK,
@@ -26,5 +29,6 @@ public:
     bool isQueen()const;
     bool isKnight()const;
     PieceType type()const;
+    static Piece &pieceFromChar(char ch);
 };
 #endif
