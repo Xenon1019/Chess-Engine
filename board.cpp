@@ -3,6 +3,7 @@
 #include <cctype>
 #include <iostream>
 #include <iomanip>
+#include <cassert>
 
 const int DefaultCharPrintWidth = 5;
 
@@ -43,7 +44,7 @@ Tile &Board::getTileByLocation(int row, int column){
     return b_tiles.at(index);
 }
 Board::Board(int size)
-    :b_size{size}, b_numTiles{size * size}, b_tiles{}
+    :b_size{size}, b_numTiles{size * size}, b_tiles{}, b_whiteToMove{true}
 {
     if (!b_tiles.empty())   throw "Something is wrong!!1\n";
     b_tiles.resize(b_numTiles);
@@ -54,10 +55,17 @@ Board::Board(int size)
 }
 
 void Board::printBoard(){
+    for(int i{};i < b_size;i++)
+        std::cout << std::setfill('-') << std::setw(DefaultCharPrintWidth)<< "X";
+    std::cout << std::setfill(' ');
     for(int tileIndex{0};tileIndex < b_numTiles;tileIndex++){
         if(tileIndex % b_size == 0)     std::cout << std::endl;
         b_tiles.at(tileIndex).printTile();
     }
+    std::cout << std::endl;
+    for(int i{};i < b_size;i++)
+        std::cout << std::setfill('-') << std::setw(DefaultCharPrintWidth)<< "X";
+    std::cout << std::endl;
 }
 Piece &Board::defaultPiece(int boardIndex) const{
     if (b_size != 8)    throw "Board size is not supported.";
@@ -85,4 +93,49 @@ Piece &Board::defaultPiece(int boardIndex) const{
 
 Board::Board(const std::string& fenString)
     :b_size{8}, b_numTiles{64}, b_tiles{}
-{}
+{
+    if (!b_tiles.empty())   throw "Something is wrong!!\n";
+    b_tiles.resize(b_numTiles);
+    bool boardFlag{true};
+    int rowCount{0}, stringIndex{0}, emptyTileCounter{0};
+    char ch;
+    int boardIndex{0};
+    for (;boardFlag;stringIndex++){
+        ch = fenString.at(stringIndex);
+        if(ch == '/') {
+            rowCount++,assert(boardIndex % 8 == 0);
+        }
+        else if(isalpha(ch)){
+            b_tiles.at(boardIndex).setPiece(Piece::pieceFromChar(ch));
+            boardIndex++;
+        }
+        else if(std::isdigit(ch)){
+            emptyTileCounter = (int)(ch - '0');
+            assert(emptyTileCounter > 0 && emptyTileCounter <= 8);
+            for(;emptyTileCounter > 0;boardIndex++,emptyTileCounter--)
+                b_tiles.at(boardIndex).setPiece(*(new Piece));
+            emptyTileCounter = 0;
+        }
+        else{
+            assert (boardIndex == b_numTiles);
+            assert(rowCount == 7);
+            boardFlag = false;
+        }
+    }
+    while (fenString.at(stringIndex) == ' ')
+        stringIndex++;
+    char toMoveFlag = tolower(fenString.at(stringIndex));
+    if (toMoveFlag == 'w')
+        b_whiteToMove = true;
+    else if(toMoveFlag == 'b')
+        b_whiteToMove = false;
+    else
+        throw "Invalid FEN String!!";
+    //CASTLING AND EN-PASSANT FLAGS FLAGS AND MOVES YET TO BE IMPLEMENTED.
+}
+
+std::array<int, 2>  Board::getLocation(int tileIndex) {
+    //TO BE IMPLEMENTED
+    assert (tileIndex >= 0 && tileIndex < 64);
+    return std::array<int, 2>{5, 5};
+}

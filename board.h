@@ -1,6 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include <vector>
+#include <array>
 #include <string>
 #include "pieces.h"
 
@@ -24,11 +25,13 @@ private:
     const int b_size;
     const int b_numTiles;
     std::vector <Tile> b_tiles;
+    bool b_whiteToMove;
 public:
     Tile & getTileByLocation(int, int);
     explicit Board(int size = 8);
     explicit Board(const std::string&);
     void printBoard();
     Piece &defaultPiece(int) const;
+    static std::array<int, 2> getLocation(int tileIndex);
 };
 #endif
