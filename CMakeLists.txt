@@ -10,4 +10,4 @@ add_executable(Chess_Engine
         board.h
         main.cpp
         pieces.cpp
-        pieces.h Move.cpp cmake-build-debug/moves.h)
+        pieces.h Move.cpp moves.h)

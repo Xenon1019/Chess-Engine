@@ -4,5 +4,18 @@
 
 #ifndef CHESS_ENGINE_MOVES_H
 #define CHESS_ENGINE_MOVES_H
+enum class MoveType{
+    SLIDE,
+    JUMP,
+    PUSH,
+    CASTLE,
+    MIXED,
+    SPECIAL
+};
 
+class Move{
+private:
+    MoveType m_moveType;
+public:
+};
 #endif //CHESS_ENGINE_MOVES_H
