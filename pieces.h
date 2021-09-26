@@ -2,7 +2,7 @@
 #define PIECES_H
 
 #include <cctype>
-#include "moves.h"
+//#include "moves.h"
 #include <cassert>
 #include <array>
 #include <vector>
@@ -15,7 +15,6 @@ enum class PieceType{
     KNIGHT,
     QUEEN,
     KING,
-    NONE
 };
 class BasicPiece{
 private:
@@ -38,15 +37,15 @@ private:
     Directions s_moveDir;
     short s_moveSize;
 public:
-    MoveType getMoveType();
+    //MoveType getMoveType();
 };
 
-class Piece{    
+class Piece{
 private:
     PieceType p_type;
     bool p_color;  //true for white          false for black
 public:
-    explicit Piece(bool color = true, PieceType type = PieceType::NONE);
+    explicit Piece(bool color, PieceType type);
     bool isWhite() const;
     bool isNone()const;
     bool isPawn()const;

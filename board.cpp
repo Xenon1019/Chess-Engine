@@ -1,5 +1,6 @@
 #include "pieces.h"
 #include "board.h"
+#include "moves.h"
 #include <cctype>
 #include <iostream>
 #include <iomanip>
@@ -9,27 +10,32 @@ const int DefaultCharPrintWidth = 5;
 
 
 Tile::Tile(bool tileColor)
-    :t_tileColor{tileColor}, t_piece{*(new Piece{})}
+    :t_tileColor{tileColor}, t_piece{nullptr}
     {}
 
-bool Tile::isEmpty(){return t_piece.isNone();}       
-Piece & Tile::getPiece() const {return t_piece;}
-PieceType Tile::pieceType(){ return t_piece.type();}
+inline bool Tile::isEmpty(){return t_piece == nullptr;}
+Piece& Tile::getPiece() const {return *t_piece;}
+PieceType Tile::pieceType(){ return t_piece->type();}
 void Tile::setColor(bool color){t_tileColor = color;}
-void Tile::setPiece(Piece &piece) {t_piece = piece;}
+void Tile::setPiece(Piece &piece) {t_piece = &piece;}
+void Tile::setEmpty(){t_piece = nullptr;}
+
 void Tile::printTile(){
     char printChar;
-    if(t_piece.isNone()){
+    if(t_piece == nullptr){
         printChar = '-';
+        std::cout << std::setw(DefaultCharPrintWidth)
+                  << printChar;
+        return;
     }
-    else if (t_piece.isKing())    printChar = 'K';
-    else if (t_piece.isPawn())    printChar = 'P';
-    else if (t_piece.isBishop())  printChar = 'B';
-    else if (t_piece.isKnight())  printChar = 'N';
-    else if (t_piece.isRook())    printChar = 'R';
-    else if (t_piece.isQueen())   printChar = 'Q';
+    else if (t_piece->isKing())    printChar = 'K';
+    else if (t_piece->isPawn())    printChar = 'P';
+    else if (t_piece->isBishop())  printChar = 'B';
+    else if (t_piece->isKnight())  printChar = 'N';
+    else if (t_piece->isRook())    printChar = 'R';
+    else if (t_piece->isQueen())   printChar = 'Q';
     else throw "How the hell did you get here!?!";
-    if (!t_piece.isWhite())       printChar = tolower(printChar);
+    if (!t_piece->isWhite())       printChar = tolower(printChar);
     std::cout << std::setw(DefaultCharPrintWidth)
               << printChar;
 }
@@ -46,11 +52,10 @@ Tile &Board::getTileByLocation(int row, int column){
 Board::Board(int size)
     :b_size{size}, b_numTiles{size * size}, b_tiles{}, b_whiteToMove{true}
 {
-    if (!b_tiles.empty())   throw "Something is wrong!!1\n";
     b_tiles.resize(b_numTiles);
     for(int tileIndex{0};tileIndex < b_numTiles;tileIndex++){
         b_tiles.at(tileIndex).setColor(tileIndex % 2 == 0);
-        b_tiles.at(tileIndex).setPiece(defaultPiece(tileIndex));
+        b_tiles.at(tileIndex).setPiece(*defaultPiece(tileIndex));
     }
 }
 
@@ -67,14 +72,14 @@ void Board::printBoard(){
         std::cout << std::setfill('-') << std::setw(DefaultCharPrintWidth)<< "X";
     std::cout << std::endl;
 }
-Piece &Board::defaultPiece(int boardIndex) const{
+Piece* Board::defaultPiece(int boardIndex) const{
     if (b_size != 8)    throw "Board size is not supported.";
     if (boardIndex >= b_numTiles)   throw "Invalid board index.";
     int row{boardIndex / b_size};
-    if (row >= 2 && row < 6)    return  *(new Piece{});
+    if (row >= 2 && row < 6)    return nullptr;
     int column{boardIndex % b_size};
     bool pieceColor{row >= 6};
-    PieceType pieceType{PieceType::NONE};
+    PieceType pieceType;
     if (row == 1 || row == 6)
         pieceType = PieceType::PAWN;
     else if(column == 0 || column == 7)
@@ -88,7 +93,7 @@ Piece &Board::defaultPiece(int boardIndex) const{
     else if(column == 4)
         pieceType = PieceType::KING;
     else throw "Something went wrong.";
-    return *(new Piece(pieceColor, pieceType));
+    return new Piece(pieceColor, pieceType);
 }
 
 Board::Board(const std::string& fenString)
@@ -113,7 +118,7 @@ Board::Board(const std::string& fenString)
             emptyTileCounter = (int)(ch - '0');
             assert(emptyTileCounter > 0 && emptyTileCounter <= 8);
             for(;emptyTileCounter > 0;boardIndex++,emptyTileCounter--)
-                b_tiles.at(boardIndex).setPiece(*(new Piece));
+                b_tiles.at(boardIndex).setEmpty();
             emptyTileCounter = 0;
         }
         else{
@@ -134,8 +139,8 @@ Board::Board(const std::string& fenString)
     //CASTLING AND EN-PASSANT FLAGS FLAGS AND MOVES YET TO BE IMPLEMENTED.
 }
 
-std::array<int, 2>  Board::getLocation(int tileIndex) {
+Location Board::getLocation(int tileIndex) {
     //TO BE IMPLEMENTED
     assert (tileIndex >= 0 && tileIndex < 64);
-    return std::array<int, 2>{5, 5};
+    return Location {5, 5};
 }

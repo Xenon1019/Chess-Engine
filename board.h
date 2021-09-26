@@ -7,7 +7,7 @@
 
 class Tile{
 private:
-    Piece &t_piece;
+    Piece *t_piece;
     bool t_tileColor;
 public:
     explicit Tile(bool tileColor = true);
@@ -17,6 +17,7 @@ public:
     void setPiece(Piece &);
     PieceType pieceType();
     void printTile();
+    inline void setEmpty();
 
 };
 
@@ -31,7 +32,7 @@ public:
     explicit Board(int size = 8);
     explicit Board(const std::string&);
     void printBoard();
-    Piece &defaultPiece(int) const;
+    Piece *defaultPiece(int) const;
     static std::array<int, 2> getLocation(int tileIndex);
 };
 #endif
