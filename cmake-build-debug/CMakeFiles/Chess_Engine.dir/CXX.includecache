@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/xenon/CLionProjects/Chess-Engine/board.cpp
+pieces.h
+/home/xenon/CLionProjects/Chess-Engine/pieces.h
+board.h
+/home/xenon/CLionProjects/Chess-Engine/board.h
+cctype
+-
+iostream
+-
+iomanip
+-
+cassert
+-
+
+/home/xenon/CLionProjects/Chess-Engine/board.h
+vector
+-
+array
+-
+string
+-
+pieces.h
+/home/xenon/CLionProjects/Chess-Engine/pieces.h
+
+/home/xenon/CLionProjects/Chess-Engine/moves.h
+
+/home/xenon/CLionProjects/Chess-Engine/pieces.h
+cctype
+-
+moves.h
+/home/xenon/CLionProjects/Chess-Engine/moves.h
+cassert
+-
+array
+-
+vector
+-
+
