@@ -2,12 +2,13 @@
 #define PIECES_H
 
 #include <cctype>
+#include <utility>
 //#include "moves.h"
 #include <cassert>
 #include <array>
 #include <vector>
 
-typedef std::array<int, 2> Location;
+typedef std::pair<int, int> Location;
 enum class PieceType{
     PAWN,
     ROOK,
@@ -16,6 +17,7 @@ enum class PieceType{
     QUEEN,
     KING,
 };
+/*
 class BasicPiece{
 private:
     Location p_location;
@@ -39,7 +41,7 @@ private:
 public:
     //MoveType getMoveType();
 };
-
+*/
 class Piece{
 private:
     PieceType p_type;
@@ -57,4 +59,38 @@ public:
     PieceType type()const;
     static Piece &pieceFromChar(char ch);
 };
+class Pawn: public Piece{
+private:
+    const PieceType p_type = PieceType::PAWN;
+public:
+};
+class Bishop: public Piece{
+private:
+    const PieceType p_type = PieceType::BISHOP;
+public:
+};
+class Knight: public Piece{
+private:
+    const PieceType p_type = PieceType::KNIGHT;
+public:
+};
+class King: public Piece{
+private:
+    bool hasMoved;
+    const PieceType p_type = PieceType::KING;
+public:
+};
+class Queen: public Piece{
+private:
+    const PieceType p_type = PieceType::QUEEN;
+public:
+};
+class Rook: public Piece{
+private:
+    bool hasMoved;
+    const PieceType p_type = PieceType::ROOK;
+public:
+};
+
+
 #endif

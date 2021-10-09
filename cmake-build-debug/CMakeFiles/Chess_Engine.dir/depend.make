@@ -6,6 +6,7 @@ CMakeFiles/Chess_Engine.dir/Move.cpp.o: \
 CMakeFiles/Chess_Engine.dir/board.cpp.o: \
  ../board.cpp \
  ../board.h \
+ ../moves.h \
  ../pieces.h
 CMakeFiles/Chess_Engine.dir/main.cpp.o: \
  ../board.h \

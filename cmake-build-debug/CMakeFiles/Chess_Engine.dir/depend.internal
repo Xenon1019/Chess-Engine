@@ -6,6 +6,7 @@ CMakeFiles/Chess_Engine.dir/Move.cpp.o
 CMakeFiles/Chess_Engine.dir/board.cpp.o
  /home/xenon/CLionProjects/Chess-Engine/board.cpp
  /home/xenon/CLionProjects/Chess-Engine/board.h
+ /home/xenon/CLionProjects/Chess-Engine/moves.h
  /home/xenon/CLionProjects/Chess-Engine/pieces.h
 CMakeFiles/Chess_Engine.dir/main.cpp.o
  /home/xenon/CLionProjects/Chess-Engine/board.h

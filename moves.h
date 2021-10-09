@@ -4,7 +4,7 @@
 #include "pieces.h"
 #include "board.h"
 #include <array>
-typedef std::array<int, 2> Location;
+typedef std::pair<int, int> Location;
 enum class MoveType{
     SLIDE,
     JUMP,
