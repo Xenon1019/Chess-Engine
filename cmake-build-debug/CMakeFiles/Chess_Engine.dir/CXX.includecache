@@ -6,11 +6,17 @@
 
 #IncludeRegexTransform: 
 
+/home/xenon/CLionProjects/Chess-Engine/Move.cpp
+moves.h
+/home/xenon/CLionProjects/Chess-Engine/moves.h
+
 /home/xenon/CLionProjects/Chess-Engine/board.cpp
 pieces.h
 /home/xenon/CLionProjects/Chess-Engine/pieces.h
 board.h
 /home/xenon/CLionProjects/Chess-Engine/board.h
+moves.h
+/home/xenon/CLionProjects/Chess-Engine/moves.h
 cctype
 -
 iostream
@@ -27,6 +33,8 @@ array
 -
 string
 -
+unordered_map
+-
 pieces.h
 /home/xenon/CLionProjects/Chess-Engine/pieces.h
 
@@ -38,6 +46,12 @@ string
 iostream
 -
 
+/home/xenon/CLionProjects/Chess-Engine/moves.h
+vector
+-
+util.h
+/home/xenon/CLionProjects/Chess-Engine/util.h
+
 /home/xenon/CLionProjects/Chess-Engine/pieces.cpp
 pieces.h
 /home/xenon/CLionProjects/Chess-Engine/pieces.h
@@ -45,10 +59,20 @@ pieces.h
 /home/xenon/CLionProjects/Chess-Engine/pieces.h
 cctype
 -
+moves.h
+/home/xenon/CLionProjects/Chess-Engine/moves.h
 cassert
 -
 array
 -
 vector
+-
+
+/home/xenon/CLionProjects/Chess-Engine/util.h
+cstdint
+-
+utility
+-
+array
 -
 

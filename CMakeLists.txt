@@ -7,7 +7,6 @@ include_directories(.)
 
 add_executable(Chess_Engine
         board.cpp
-        board.h
         main.cpp
         pieces.cpp
-        pieces.h Move.cpp moves.h)
+        Move.cpp)
