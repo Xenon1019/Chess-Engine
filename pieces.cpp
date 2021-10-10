@@ -46,3 +46,16 @@ Piece &Piece::pieceFromChar(char ch){
     }
     return *(new Piece(color, type));
 }
+
+
+std::vector<MoveType> Piece::getMoveTypes() const{
+    if (isPawn())
+        return std::vector<MoveType>{MoveType::PUSH, MoveType::PROMOTE};
+    else if(isKing())
+        return std::vector<MoveType>{MoveType::JUMP, MoveType::CASTLE};
+    else if(isQueen() || isRook() || isBishop())
+        return std::vector<MoveType>{MoveType::SLIDE};
+    else if(isKnight())
+        return std::vector<MoveType>{MoveType::JUMP};
+    else return std::vector<MoveType>{};
+}

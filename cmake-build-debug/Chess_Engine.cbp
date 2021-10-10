@@ -96,9 +96,6 @@
 		<Unit filename="/home/xenon/CLionProjects/Chess-Engine/main.cpp">
 			<Option target="Chess_Engine"/>
 		</Unit>
-		<Unit filename="/home/xenon/CLionProjects/Chess-Engine/moves.h">
-			<Option target="Chess_Engine"/>
-		</Unit>
 		<Unit filename="/home/xenon/CLionProjects/Chess-Engine/pieces.cpp">
 			<Option target="Chess_Engine"/>
 		</Unit>
