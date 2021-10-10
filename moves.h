@@ -30,7 +30,7 @@ class Jumper: public Move{
 public:
     Jumper(LocationKey from, LocationKey to): Move{from, to} {}
     MoveType type() override{ return MoveType::JUMP;}
-    static std::vector<Jumper> getPrelimMoves(LocationKey loc, const std::vector<Location> &vects, int boardSize);
+    static std::vector<Jumper> getPrelimMoves(LocationKey loc, const std::vector<Location> &vects, short boardSize);
 };
 
 class Pusher: public Move{

@@ -3,7 +3,7 @@
 //
 #include "moves.h"
 
-std::vector<Jumper> Jumper::getPrelimMoves(LocationKey loc, const std::vector<Location> &vects, int boardSize = 8) {
+std::vector<Jumper> Jumper::getPrelimMoves(LocationKey loc, const std::vector<Location> &vects, short boardSize = 8) {
     std::vector<Jumper> moves{};
     for (auto vect:vects){
         auto mirroredVects{mirrorVectors4(vect)};

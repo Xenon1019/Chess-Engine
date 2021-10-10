@@ -22,3 +22,6 @@ CMakeFiles/Chess_Engine.dir/pieces.cpp.o: \
  ../pieces.cpp \
  ../pieces.h \
  ../util.h
+CMakeFiles/Chess_Engine.dir/utils.cpp.o: \
+ ../util.h \
+ ../utils.cpp

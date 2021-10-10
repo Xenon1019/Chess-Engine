@@ -225,6 +225,30 @@ pieces.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chess_Engine.dir/build.make CMakeFiles/Chess_Engine.dir/pieces.cpp.s
 .PHONY : pieces.cpp.s
 
+utils.o: utils.cpp.o
+.PHONY : utils.o
+
+# target to build an object file
+utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chess_Engine.dir/build.make CMakeFiles/Chess_Engine.dir/utils.cpp.o
+.PHONY : utils.cpp.o
+
+utils.i: utils.cpp.i
+.PHONY : utils.i
+
+# target to preprocess a source file
+utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chess_Engine.dir/build.make CMakeFiles/Chess_Engine.dir/utils.cpp.i
+.PHONY : utils.cpp.i
+
+utils.s: utils.cpp.s
+.PHONY : utils.s
+
+# target to generate assembly for a file
+utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Chess_Engine.dir/build.make CMakeFiles/Chess_Engine.dir/utils.cpp.s
+.PHONY : utils.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -246,6 +270,9 @@ help:
 	@echo "... pieces.o"
 	@echo "... pieces.i"
 	@echo "... pieces.s"
+	@echo "... utils.o"
+	@echo "... utils.i"
+	@echo "... utils.s"
 .PHONY : help
 
 

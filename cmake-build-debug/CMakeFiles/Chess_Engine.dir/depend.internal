@@ -22,3 +22,6 @@ CMakeFiles/Chess_Engine.dir/pieces.cpp.o
  /home/xenon/CLionProjects/Chess-Engine/pieces.cpp
  /home/xenon/CLionProjects/Chess-Engine/pieces.h
  /home/xenon/CLionProjects/Chess-Engine/util.h
+CMakeFiles/Chess_Engine.dir/utils.cpp.o
+ /home/xenon/CLionProjects/Chess-Engine/util.h
+ /home/xenon/CLionProjects/Chess-Engine/utils.cpp

@@ -9,4 +9,4 @@ add_executable(Chess_Engine
         board.cpp
         main.cpp
         pieces.cpp
-        Move.cpp)
+        Move.cpp utils.cpp)

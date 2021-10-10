@@ -149,7 +149,7 @@ Board::Board(const std::string& fenString): b_bitboard_black{0}, b_bitboard_whit
             boardFlag = false;
         }
     }
-    if(!hasBlackKing || !hasWhiteKing) throw "Board has to have both white and black kings!!!";
+    assert (hasBlackKing && hasWhiteKing);
     while (fenString.at(stringIndex) == ' ')
         stringIndex++;
     char toMoveFlag = tolower(fenString.at(stringIndex));

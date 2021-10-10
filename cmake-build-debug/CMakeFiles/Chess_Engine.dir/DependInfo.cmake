@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/xenon/CLionProjects/Chess-Engine/board.cpp" "/home/xenon/CLionProjects/Chess-Engine/cmake-build-debug/CMakeFiles/Chess_Engine.dir/board.cpp.o"
   "/home/xenon/CLionProjects/Chess-Engine/main.cpp" "/home/xenon/CLionProjects/Chess-Engine/cmake-build-debug/CMakeFiles/Chess_Engine.dir/main.cpp.o"
   "/home/xenon/CLionProjects/Chess-Engine/pieces.cpp" "/home/xenon/CLionProjects/Chess-Engine/cmake-build-debug/CMakeFiles/Chess_Engine.dir/pieces.cpp.o"
+  "/home/xenon/CLionProjects/Chess-Engine/utils.cpp" "/home/xenon/CLionProjects/Chess-Engine/cmake-build-debug/CMakeFiles/Chess_Engine.dir/utils.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

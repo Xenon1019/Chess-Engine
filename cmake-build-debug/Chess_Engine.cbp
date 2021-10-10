@@ -102,6 +102,9 @@
 		<Unit filename="/home/xenon/CLionProjects/Chess-Engine/pieces.h">
 			<Option target="Chess_Engine"/>
 		</Unit>
+		<Unit filename="/home/xenon/CLionProjects/Chess-Engine/utils.cpp">
+			<Option target="Chess_Engine"/>
+		</Unit>
 		<Unit filename="/home/xenon/CLionProjects/Chess-Engine/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

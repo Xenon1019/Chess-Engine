@@ -20,7 +20,6 @@ private:
     PieceType p_type;
     bool p_color;  //true for white          false for black
 public:
-    ~Piece(){delete this;}
     explicit Piece(bool color, PieceType type);
     bool isWhite() const;
     bool isPawn()const;

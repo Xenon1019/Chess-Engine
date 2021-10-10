@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/xenon/CLionProjects/Chess-Engine/Move.cpp
-moves.h
-/home/xenon/CLionProjects/Chess-Engine/moves.h
-
 /home/xenon/CLionProjects/Chess-Engine/board.cpp
 pieces.h
 /home/xenon/CLionProjects/Chess-Engine/pieces.h
