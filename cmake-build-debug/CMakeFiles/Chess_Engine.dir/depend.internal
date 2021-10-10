@@ -3,22 +3,15 @@
 
 CMakeFiles/Chess_Engine.dir/Move.cpp.o
  /home/xenon/CLionProjects/Chess-Engine/Move.cpp
- /home/xenon/CLionProjects/Chess-Engine/moves.h
- /home/xenon/CLionProjects/Chess-Engine/util.h
 CMakeFiles/Chess_Engine.dir/board.cpp.o
  /home/xenon/CLionProjects/Chess-Engine/board.cpp
  /home/xenon/CLionProjects/Chess-Engine/board.h
  /home/xenon/CLionProjects/Chess-Engine/moves.h
  /home/xenon/CLionProjects/Chess-Engine/pieces.h
- /home/xenon/CLionProjects/Chess-Engine/util.h
 CMakeFiles/Chess_Engine.dir/main.cpp.o
  /home/xenon/CLionProjects/Chess-Engine/board.h
  /home/xenon/CLionProjects/Chess-Engine/main.cpp
- /home/xenon/CLionProjects/Chess-Engine/moves.h
  /home/xenon/CLionProjects/Chess-Engine/pieces.h
- /home/xenon/CLionProjects/Chess-Engine/util.h
 CMakeFiles/Chess_Engine.dir/pieces.cpp.o
- /home/xenon/CLionProjects/Chess-Engine/moves.h
  /home/xenon/CLionProjects/Chess-Engine/pieces.cpp
  /home/xenon/CLionProjects/Chess-Engine/pieces.h
- /home/xenon/CLionProjects/Chess-Engine/util.h

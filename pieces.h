@@ -2,11 +2,13 @@
 #define PIECES_H
 
 #include <cctype>
-#include "moves.h"
+#include <utility>
+//#include "moves.h"
 #include <cassert>
 #include <array>
 #include <vector>
 
+typedef std::pair<int, int> Location;
 enum class PieceType{
     PAWN,
     ROOK,
@@ -15,14 +17,39 @@ enum class PieceType{
     QUEEN,
     KING,
 };
+/*
+class BasicPiece{
+private:
+    Location p_location;
+    bool p_color;
+public:
+    BasicPiece(int row, int column, bool color)
+        : p_location{row, column}, p_color{color}
+    {}
+    virtual std::vector <Location> getMoveSquares() = 0;
+};
+
+class BasicSlider:public BasicPiece{
+public:
+    enum Directions{
+        N, E, W, S,
+        NE, SE, SW, NW
+    };
+private:
+    Directions s_moveDir;
+    short s_moveSize;
+public:
+    //MoveType getMoveType();
+};
+*/
 class Piece{
 private:
     PieceType p_type;
     bool p_color;  //true for white          false for black
 public:
-    ~Piece(){delete this;}
     explicit Piece(bool color, PieceType type);
     bool isWhite() const;
+    bool isNone()const;
     bool isPawn()const;
     bool isBishop()const;
     bool isRook()const;
@@ -31,14 +58,7 @@ public:
     bool isKnight()const;
     PieceType type()const;
     static Piece &pieceFromChar(char ch);
-    std::vector<MoveType> getMoveTypes() const;
-
-    };
-
-
-
-
-
+};
 class Pawn: public Piece{
 private:
     const PieceType p_type = PieceType::PAWN;

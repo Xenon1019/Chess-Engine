@@ -9,16 +9,77 @@
 const int DefaultCharPrintWidth = 5;
 
 
+int Board::locationToIndex(Location loc){
+    return (loc.first - 1) * 8 + loc.second - 1;
+}
+Location Board::indexToLocation(int index) {
+    return Location{index / b_size + 1, index % b_size + 1};
+}
 bool Board::getTileColor(Location loc){
     return (loc.first + loc.second) % 2 == 0;
 }
 
-Piece* Board::defaultPiece(LocationKey loc) {
-    //Have to implement the function using Location....
-    if (loc >= b_size * b_size)   throw "Invalid board index.";
-    int row{loc / b_size};
+
+void Board::setPiece(Piece* piece, int index){
+    if (b_pieces.count(index) > 1) throw "The key bucket size is more than 1";
+    if (piece == nullptr)
+        b_pieces.erase(index);
+    else
+        b_pieces.insert_or_assign(index, *piece);
+}
+
+
+void Board::printTile(Location loc){
+    char printChar;
+    const Piece* piece{getPieceByLocation((loc))};
+    if(piece == nullptr){
+        printChar = '-';
+        std::cout << std::setw(DefaultCharPrintWidth)
+                  << printChar;
+        return;
+    }
+    else if (piece->isKing())    printChar = 'K';
+    else if (piece->isPawn())    printChar = 'P';
+    else if (piece->isBishop())  printChar = 'B';
+    else if (piece->isKnight())  printChar = 'N';
+    else if (piece->isRook())    printChar = 'R';
+    else if (piece->isQueen())   printChar = 'Q';
+    else throw "How the hell did you get here!?!";
+    if (!piece->isWhite())       printChar = tolower(printChar);
+    std::cout << std::setw(DefaultCharPrintWidth)
+              << printChar;
+}
+
+
+
+
+Board::Board(int size)
+    :b_whiteToMove{true}
+{
+    for(int tileIndex{0};tileIndex < b_size * b_size;tileIndex++){
+        setPiece(defaultPiece(tileIndex), tileIndex);
+    }
+}
+
+void Board::printBoard(){
+    for(int i{};i < b_size;i++)
+        std::cout << std::setfill('-') << std::setw(DefaultCharPrintWidth)<< "X";
+    std::cout << std::setfill(' ');
+    for(int tileIndex{0};tileIndex < b_size * b_size;tileIndex++){
+        if(tileIndex % b_size == 0)     std::cout << std::endl;
+        printTile(indexToLocation(tileIndex));
+    }
+    std::cout << std::endl;
+    for(int i{};i < b_size;i++)
+        std::cout << std::setfill('-') << std::setw(DefaultCharPrintWidth)<< "X";
+    std::cout << std::endl;
+}
+Piece* Board::defaultPiece(int boardIndex) {
+    //Have to implement the function using Location type...
+    if (boardIndex >= b_size * b_size)   throw "Invalid board index.";
+    int row{boardIndex / b_size};
     if (row >= 2 && row < 6)    return nullptr;
-    int column{loc % b_size};
+    int column{boardIndex % b_size};
     bool pieceColor{row >= 6};
     PieceType pieceType;
     if (row == 1 || row == 6)
@@ -37,82 +98,9 @@ Piece* Board::defaultPiece(LocationKey loc) {
     return new Piece(pieceColor, pieceType);
 }
 
-Piece* Board::getPieceByLocation(LocationKey loc){
-    auto element = b_pieces.find(loc);
-    if (element == b_pieces.end()) return nullptr;
-    else return element->second;
-}
-
-void Board::setPiece(Piece* piece, LocationKey loc){
-    if (b_pieces.count(loc) > 1) throw "The key bucket size is more than 1";
-    if (piece == nullptr)
-        b_pieces.erase(loc);
-    else
-        b_pieces.insert_or_assign(loc, piece);
-}
-
-
-void Board::printTile(LocationKey loc){
-    char printChar;
-    const Piece* piece{getPieceByLocation(loc)};
-    if(piece == nullptr){
-        printChar = '-';
-        std::cout << std::setw(DefaultCharPrintWidth)
-                  << printChar;
-        return;
-    }
-    else if (piece->isKing())    printChar = 'K';
-    else if (piece->isPawn())    printChar = 'P';
-    else if (piece->isBishop())  printChar = 'B';
-    else if (piece->isKnight())  printChar = 'N';
-    else if (piece->isRook())    printChar = 'R';
-    else if (piece->isQueen())   printChar = 'Q';
-    else throw "How the hell did you get here!?!";
-    if (! piece->isWhite())       printChar = tolower(printChar);
-    std::cout << std::setw(DefaultCharPrintWidth)
-              << printChar;
-}
-
-void Board::printBoard(){
-    for(int i{};i < b_size;i++)
-        std::cout << std::setfill('-') << std::setw(DefaultCharPrintWidth)<< "X";
-    std::cout << std::setfill(' ');
-    for(int tileIndex{0};tileIndex < b_size * b_size;tileIndex++){
-        if(tileIndex % b_size == 0)     std::cout << std::endl;
-        printTile(tileIndex);
-    }
-    std::cout << std::endl;
-    for(int i{};i < b_size;i++)
-        std::cout << std::setfill('-') << std::setw(DefaultCharPrintWidth)<< "X";
-    std::cout << std::endl;
-}
-
-/*
----------------------------
- 00 01 02 03 04 05 06 07
- 08 09 10 11 12 13 14 15
- 16 17 18 19 20 21 22 23
- 24 25 26 27 28 29 30 31
- 32 33 34 35 36 37 38 39
- 40 41 42 43 44 45 46 47
- 48 49 50 51 52 53 54 55
- 56 57 58 59 60 61 62 63
-----------------------------
-*/
-Board::Board(int size)
-    :b_whiteToMove{true}, b_kings{60,4}, b_bitboard_black{CLASSICAL_BITBOARD_BLACK}, b_bitboard_white{CLASSICAL_BITBOARD_WHITE}
-{
-    for(int tileIndex{0};tileIndex < b_size * b_size;tileIndex++){
-        setPiece(defaultPiece(tileIndex), tileIndex);
-    }
-}
-
-
-
-Board::Board(const std::string& fenString): b_bitboard_black{0}, b_bitboard_white{0}
+Board::Board(const std::string& fenString)
 {
     bool boardFlag{true};
-    bool hasWhiteKing{false}, hasBlackKing{false};
     int rowCount{0}, stringIndex{0}, emptyTileCounter{0};
     char ch;
     int boardIndex{0};
@@ -122,17 +110,6 @@ Board::Board(const std::string& fenString): b_bitboard_black{0}, b_bitboard_whit
             rowCount++,assert(boardIndex % 8 == 0);
         }
         else if(isalpha(ch)){
-            if (ch == 'K') {
-                assert(!hasWhiteKing && "Already has a white king.");
-                b_kings.first = boardIndex;
-                hasWhiteKing = true;
-            }
-            else if(ch == 'k') {
-                assert(!hasBlackKing && "Already has a black king.");
-                b_kings.second = boardIndex;
-                hasBlackKing = true;
-            }
-            (isupper(ch)?b_bitboard_white:b_bitboard_black).setBit(boardIndex);
             setPiece(&Piece::pieceFromChar(ch), boardIndex);
             boardIndex++;
         }
@@ -149,7 +126,6 @@ Board::Board(const std::string& fenString): b_bitboard_black{0}, b_bitboard_whit
             boardFlag = false;
         }
     }
-    if(!hasBlackKing || !hasWhiteKing) throw "Board has to have both white and black kings!!!";
     while (fenString.at(stringIndex) == ' ')
         stringIndex++;
     char toMoveFlag = tolower(fenString.at(stringIndex));
@@ -162,13 +138,10 @@ Board::Board(const std::string& fenString): b_bitboard_black{0}, b_bitboard_whit
     //CASTLING AND EN-PASSANT FLAGS FLAGS AND MOVES YET TO BE IMPLEMENTED.
 }
 
-void Board::getMovesForPiece(LocationKey loc) {
-    Piece *piece = getPieceByLocation(loc);
-    std::vector<Location> vects {{1, 2}, {2, 1}};
-    for (auto moveType: piece->getMoveTypes()){
-        std::cout << Jumper::getPrelimMoves(loc, vects, b_size).size() << std::endl;
-    }
 
+
+Piece* Board::getPieceByLocation(Location loc){
+    auto element = b_pieces.find(locationToIndex(loc));
+    if (element == b_pieces.end()) return nullptr;
+    else return &element->second;
 }
-
-
