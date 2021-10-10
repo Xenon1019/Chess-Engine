@@ -1,5 +1,6 @@
 #include "pieces.h"
 
+
 bool Piece::isWhite() const{return p_color;}
 bool Piece::isBishop()const{return p_type == PieceType::BISHOP;}
 bool Piece::isRook()const{return p_type == PieceType::ROOK;}
